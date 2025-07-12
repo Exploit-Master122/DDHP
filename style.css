@@ -1,9 +1,8 @@
-/* DDHP - Dark Blue and Red Theme */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 body {
@@ -47,7 +46,7 @@ p {
   border: none;
   border-radius: 5px;
   background-color: #21262d;
-  color: #ffffff;
+  color: #fff;
   outline: none;
 }
 
@@ -59,7 +58,6 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 button:hover {
@@ -71,5 +69,5 @@ iframe {
   height: 80vh;
   border: none;
   border-radius: 10px;
-  box-shadow: 0 0 20px rgba(9, 22, 43, 0.7);
+  background: #161b22;
 }
