@@ -4,26 +4,34 @@
   <meta charset="UTF-8" />
   <title>Darrkon Digital Hypertext Proxy (DDHP)</title>
   <link rel="stylesheet" href="style.css" />
-  <script src="uv.js" defer></script>
-  <script src="sw.js" defer></script>
+  <script src="uv.js"></script>
+  <script src="sw.js"></script>
 </head>
 <body>
   <div class="container">
     <h1>Darrkon Digital Hypertext Proxy (DDHP)</h1>
-    <p>Type a URL!</p>
-    
+    <p>Enter any CORS-enabled URL to visit it here:</p>
+
     <div class="input-group">
-      <input type="text" id="urlInput" placeholder="https://florr.io " />
-      <button onclick="go()">Deploy</button>
+      <input type="text" id="urlInput" placeholder="Type a URL... " />
+      <button onclick="go()">Go</button>
     </div>
 
-    <iframe id="frame" src="" allowfullscreen></iframe>
+    <iframe id="frame" allowfullscreen></iframe>
   </div>
 
   <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').then(() => {
+          console.log('Service Worker Registered');
+        });
+      });
+    }
+
     function go() {
       const url = document.getElementById('urlInput').value.trim();
-      if (!url) return alert("Please enter a URL.");
+      if (!url) return alert("Enter a URL.");
       try {
         new URL(url);
         document.getElementById('frame').src = _uv.route(url);
