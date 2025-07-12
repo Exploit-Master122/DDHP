@@ -4,20 +4,19 @@ self.addEventListener('fetch', event => {
 
   if (path.startsWith('/proxy/')) {
     const encodedUrl = path.split('/proxy/')[1];
-    let url;
+    let targetUrl;
     try {
-      url = atob(encodedUrl);
+      targetUrl = atob(encodedUrl);
     } catch (e) {
       return event.respondWith(new Response('Invalid URL encoding.', { status: 400 }));
     }
 
-    // Ensure valid protocol
-    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+    if (!targetUrl.startsWith('http://') && !targetUrl.startsWith('https://')) {
       return event.respondWith(new Response('Only HTTP(S) URLs are supported.', { status: 400 }));
     }
 
     event.respondWith(
-      fetch(url, {
+      fetch(targetUrl, {
         method: event.request.method,
         headers: event.request.headers,
         mode: 'cors',
@@ -37,4 +36,4 @@ self.addEventListener('fetch', event => {
       })
     );
   }
-});sw
+});
