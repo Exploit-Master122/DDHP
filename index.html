@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Darrkon Digital Hypertext Proxy (DDHP)</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="uv.js" defer></script>
+  <script src="sw.js" defer></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Darrkon Digital Hypertext Proxy (DDHP)</h1>
+    <p>Type a URL!</p>
+    
+    <div class="input-group">
+      <input type="text" id="urlInput" placeholder="https://florr.io " />
+      <button onclick="go()">Deploy</button>
+    </div>
+
+    <iframe id="frame" src="" allowfullscreen></iframe>
+  </div>
+
+  <script>
+    function go() {
+      const url = document.getElementById('urlInput').value.trim();
+      if (!url) return alert("Please enter a URL.");
+      try {
+        new URL(url);
+        document.getElementById('frame').src = _uv.route(url);
+      } catch (e) {
+        alert("Invalid URL. Please include http:// or https://");
+      }
+    }
+  </script>
+</body>
+</html>
